@@ -40,8 +40,63 @@
                     }
                 }
             }
-            //GET o POST , url, true=> Asincrono false=> Sincrono 
+            //GET o POST , url, true=> Asincrono false=> Sincrono
+            xmlhttp.open("GET", "alumnosXML.php?q="+p, true)
+            //Ejecutamos la lectura
+            xmlhttp.send() 
         } 
+        function procesaArchivo(objetoXML)
+        {
+            var cadena = <table border='1'>
+            var a = objetoXML.documentElement.getElementsByTagName("alumno");
+            document.getElementById("alumnos").innerHTML="Alumnos"+a.length;
+
+            for (var i=0; i<a.length; i++)
+            {
+                cadena+="<tr>";
+                nom = a[i].getElementsByTagName("Nombres");
+                {
+                    try {
+                        cadena+="<td>"+nom[0].firstChild.noneValue+"</td>";
+                    }
+                    catch (err)
+                    {
+                        cadena+="<td></td>"
+                    }
+                }
+                ap = a[i].getElementsByTagName("Apellidos");
+                {
+                    try {
+                        cadena +="<td>"+ap[0].firstChild.noneValue+"</td>";
+                    }
+                    catch (err){
+                        cadena+="<td></td>"
+                    }
+                }
+                pro = a[i].getElementsByTagName("Promedio")
+                {
+                    try {
+                        cadena +="<td>"+pro[0].firstChild.noneValue+"</td>";
+                    }
+                    catch (err){
+                        cadena+="<td></td>"
+                    }
+                }
+                cadena += "</tr>";
+            }
+            cadena += "</table>";
+            document.getElementById("salida").innerHTML=cadena;
+        }
     </script> 
     </head>
+    <body>
+    <button onclick="Buscar Alumnos('A')">  A  </button>
+    <button onclick="Buscar Alumnos('B')">  B  </button>
+    <button onclick="Buscar Alumnos('C')">  C  </button>
+    <button onclick="Buscar Alumnos('D')">  D  </button>
+    <button onclick="Buscar Alumnos('E')">  E  </button>
+    <button onclick="Buscar Alumnos('F')">  F  </button>
+    <p><span id="alumnos"></span></p>
+    <div id ="salida"></div>
+    </body>
 </html>
