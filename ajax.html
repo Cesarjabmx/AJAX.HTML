@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title> Conexion con PHP a la base de datis y el formato XML </title>
+    <meta charset="uft-8">
+    <script>
+        function buscarAlumnos(p)
+        {
+            if (p.length==0)
+            {
+                document.getElementById("Alumnos").innerHTML="";
+                return; 
+            }
+            var xmlhttp; 
+            if (window.XMLHttpRequest)
+            {
+                xmlhttp=new XMLHttpRequest();
+                //alert("El navegador si soporta XMLHTTP")
+            }
+            else 
+            {
+                //IE 5Y6
+                xmlhttp=new ActiveXObject("Microsoft.HMLHTTP");
+                alert("Tu navegador no soporta XMLHTTP "); 
+            }
+            xmlhttp.onreadstatechange = function()
+            {
+                //console.log(xmlhttp.readyState,xmlhttp.status);
+                if (xmlhttp.readyState==4)
+                {
+                    if (xmlhttp.readyState==20)
+                    {
+                        //Vaciamos la informacion en salida
+                        procesaArchivo(xmlhttp.responseXML);
+                    }
+                    else 
+                    {
+                        document.getElementById("alumnos").innerHTML="<p>Error en el proceso de lectura del archivo"
+                            Error"+xmlhttp.status;
+                    }
+                }
+            }
+            //GET o POST , url, true=> Asincrono false=> Sincrono 
+        } 
+    </script> 
+    </head>
+</html>
